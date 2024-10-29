@@ -16,7 +16,16 @@ var config = {
     },
 };
 var game = new Phaser.Game(config);
-var platform;
+var character = "Purple_Head";
+var player;
+var stars;
+var bombs;
+var platforms;
+var cursors;
+var score = 0;
+var gameOver = false;
+var scoreText;
+
 function preload() {
     this.load.image("sky", "assets/sky.png");
     this.load.image("ground", "assets/platform.png");
@@ -96,6 +105,27 @@ function create() {
 
     //  Input Events
     cursors = this.input.keyboard.createCursorKeys();
+    // adding some stars to collect
+    stars = this.physics.add.group({
+        key: "star",
+        repeat: 11,
+        setXY: {x: 12, y: 0, stepX: 70},
+    });
+
+    stars.children.iterate(function (child) {
+        //  adding bounces to each star
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+
+    bombs = this.physics.add.group();
+
+    //  The score
+    scoreText = this.add.text(16, 16, "score: 0", {fontSize: "32px", fill: "#000"});
+
+    //  Collide the player and the stars with the platforms
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(bombs, platforms);
 }
 
 function update() {}
