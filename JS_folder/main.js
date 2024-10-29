@@ -15,8 +15,17 @@ var config = {
         update: update,
     },
 };
-function preload() {}
+var game = new Phaser.Game(config);
 
+function preload() {
+    this.load.image("sky", "assets/sky.png");
+    this.load.image("ground", "assets/platform.png");
+    this.load.image("obstacle", "assets/obstacle.png");
+    this.load.image("wall", "assets/wall.jpg");
+    this.load.image("star", "assets/star.png");
+    this.load.image("bomb", "assets/bomb.png");
+    this.load.spritesheet("dude", "assets/Purple_Head.png", {frameWidth: 24, frameHeight: 36});
+}
 function create() {}
 
 function update() {}
