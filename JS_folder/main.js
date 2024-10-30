@@ -261,23 +261,71 @@ function createLevel3() {
     this.physics.add.overlap(player, stars, collectStar, null, this);
 }
 
+
 function collectStar(player, star) {
     star.disableBody(true, true);
     score += 10;
     scoreText.setText("Score: " + score);
 
     if (stars.countActive(true) === 0) {
-        // Move to the next level based on the current level
-        if (currentLevel === 1) {
+        // Show win screen for the current level
+        showWinScreen.call(this, currentLevel);
+        
+        // Update the level counter
+        if (currentLevel < 3) {
             currentLevel++;
-            level.setText("Level " + currentLevel);
-            createLevel2.call(this);
-        } else if (currentLevel === 2) {
-            currentLevel++;
-            level.setText("Level " + currentLevel);
-            createLevel3.call(this);
-        } else {
-            console.log(" Congarts, you've completed all levels!");
+            level.setText("Level " + currentLevel); // Update the level display
         }
+    }
+}
+
+function showWinScreen(level) {
+    // Create a black overlay
+    const overlay = this.add.graphics();
+    overlay.fillStyle(0x000000, 0.8);  // Black with 80% opacity
+    overlay.fillRect(0, 0, this.sys.game.config.width, this.sys.game.config.height);
+
+    // Determine the message based on the level
+    const message = level === 3 ? "Congrats! You've completed all levels!" : `You won Level ${level}!`;
+
+    // Display the message text with wrapping
+    const winText = this.add.text(this.sys.game.config.width / 2, this.sys.game.config.height / 2, message, {
+        fontSize: "32px",
+        color: "#ffffff",
+        align: "center",
+        wordWrap: { width: this.sys.game.config.width - 40 }
+    });
+    winText.setOrigin(0.5);
+
+    if (level === 3) {
+        // Automatically reset the game to Level 1 after a short delay
+        this.time.delayedCall(3000, () => {
+            // Reset the game state for Level 1
+            currentLevel = 1;
+            score = 0;
+            gameOver = false;
+
+            // Update displayed score and level text
+            scoreText.setText("Score: " + score);
+            level.setText("Level: " + currentLevel);
+
+            // Remove overlay and message, then restart Level 1
+            overlay.destroy();
+            winText.destroy();
+            createLevel1.call(this);
+        }, [], this);
+    } else {
+        // Auto-load the next level after a short delay
+        this.time.delayedCall(2000, () => {
+            overlay.destroy();
+            winText.destroy();
+
+            // Load the next level based on the current level
+            if (level === 1) {
+                createLevel2.call(this);
+            } else if (level === 2) {
+                createLevel3.call(this);
+            }
+        }, [], this);
     }
 }
