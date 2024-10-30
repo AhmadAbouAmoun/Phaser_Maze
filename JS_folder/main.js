@@ -285,3 +285,59 @@ function createLevel1() {
     this.physics.add.overlap(player, stars, collectStar, null, this);
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 }
+
+function createLevel2() {
+    // Clear existing platforms and obstacles
+    platforms.clear(true, true);
+
+    // Create Level 2 platforms and obstacles
+    platforms.create(400, 568, "ground").setScale(2).refreshBody();
+    //1st obstacle
+
+    platforms.create(700, 400, "obstacle");
+    platforms.create(380, 400, "obstacle");
+    platforms.create(150, 400, "obstacle");
+    platforms.create(50, 400, "obstacle");
+    platforms.create(180, 350, "wall");
+    platforms.create(472, 350, "wall");
+
+    //2nd obstacle
+    platforms.create(450, 300, "obstacle");
+    platforms.create(700, 300, "obstacle");
+    platforms.create(200, 300, "obstacle");
+    platforms.create(292, 250, "wall");
+    platforms.create(500, 250, "wall");
+
+    //3rd
+    platforms.create(750, 200, "obstacle");
+    platforms.create(650, 200, "obstacle");
+    platforms.create(350, 200, "obstacle");
+    platforms.create(180, 200, "obstacle");
+    platforms.create(500, 150, "wall");
+    platforms.create(280, 150, "wall");
+
+    //4th obstacle
+    platforms.create(800, 100, "obstacle");
+    platforms.create(188, 100, "obstacle");
+    platforms.create(258, 100, "obstacle");
+    platforms.create(488, 100, "obstacle");
+    platforms.create(396, 50, "wall");
+
+    // Create stars for Level 2
+    stars = this.physics.add.group({
+        key: "star",
+        repeat: 5,
+        setXY: { x: 12, y: 0, stepX: 150 },
+    });
+    stars.children.iterate(function (child) {
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+
+    bombs = this.physics.add.group();
+
+    // Collisions
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(bombs, platforms);
+    this.physics.add.overlap(player, stars, collectStar, null, this);
+}
