@@ -341,3 +341,81 @@ function createLevel2() {
     this.physics.add.collider(bombs, platforms);
     this.physics.add.overlap(player, stars, collectStar, null, this);
 }
+
+function createLevel3() {
+    // Clear existing platforms and obstacles
+    platforms.clear(true, true);
+
+    // Create Level 3 platforms and obstacles
+    platforms.create(400, 568, "ground").setScale(2).refreshBody();
+    platforms.create(800, 400, "obstacle");
+    platforms.create(480, 400, "obstacle");
+    platforms.create(430, 400, "obstacle");
+    platforms.create(150, 400, "obstacle");
+    platforms.create(50, 400, "obstacle");
+    platforms.create(180, 350, "wall");
+    platforms.create(472, 350, "wall");
+    platforms.create(572, 450, "wall");
+    platforms.create(572, 500, "wall");
+
+    //2nd obstacle
+    platforms.create(450, 300, "obstacle");
+    platforms.create(780, 300, "obstacle");
+    platforms.create(200, 300, "obstacle");
+    platforms.create(150, 250, "wall");
+    platforms.create(500, 250, "wall");
+
+    //3rd
+    platforms.create(780, 200, "obstacle");
+    platforms.create(500, 200, "obstacle");
+    platforms.create(180, 200, "obstacle");
+    platforms.create(272, 150, "wall");
+
+    //4th obstacle
+    platforms.create(800, 100, "obstacle");
+    platforms.create(188, 100, "obstacle");
+    platforms.create(230, 100, "obstacle");
+    platforms.create(488, 100, "obstacle");
+    platforms.create(396, 50, "wall");
+
+
+
+    // Create stars for Level 3
+    stars = this.physics.add.group({
+        key: "star",
+        repeat: 7,
+        setXY: { x: 12, y: 0, stepX: 100 },
+    });
+    stars.children.iterate(function (child) {
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+
+    bombs = this.physics.add.group();
+
+    // Collisions
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(bombs, platforms);
+    this.physics.add.overlap(player, stars, collectStar, null, this);
+}
+
+function collectStar(player, star) {
+    star.disableBody(true, true);
+    score += 10;
+    scoreText.setText("Score: " + score);
+
+    if (stars.countActive(true) === 0) {
+        // Move to the next level based on the current level
+        if (currentLevel === 1) {
+            currentLevel++;
+            createLevel2.call(this); // Load Level 2
+        } else if (currentLevel === 2) {
+            currentLevel++;
+            createLevel3.call(this); // Load Level 3
+        } else {
+            console.log("You've completed all levels!");
+            // Optionally reset to level 1 or show a completion message
+        }
+    }
+}
+
