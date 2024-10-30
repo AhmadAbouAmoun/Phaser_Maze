@@ -25,6 +25,7 @@ var score = 0;
 var gameOver = false;
 var scoreText;
 var currentLevel = 1;
+var level;
 
 function preload() {
     this.load.image("sky", "assets/sky.png");
@@ -143,6 +144,7 @@ function createLevel1() {
 
     // The score
     scoreText = this.add.text(16, 16, "Score: 0", {fontSize: "32px", fill: "#000"});
+    level = this.add.text(16, 50, "Level :1", {fontSize: "32px", fill: "#000"});
 
     // Collisions
     this.physics.add.collider(player, platforms);
@@ -268,9 +270,11 @@ function collectStar(player, star) {
         // Move to the next level based on the current level
         if (currentLevel === 1) {
             currentLevel++;
+            level.setText("Level " + currentLevel);
             createLevel2.call(this);
         } else if (currentLevel === 2) {
             currentLevel++;
+            level.setText("Level " + currentLevel);
             createLevel3.call(this);
         } else {
             console.log(" Congarts, you've completed all levels!");
