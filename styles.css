@@ -180,7 +180,7 @@ footer h2 {
     font-size: 1.2rem;
 }
 
-.quick a, .contact a, .privacy a {
+.quick , .contact , .privacy  {
     text-decoration: none;
     color: #000000;
 }
