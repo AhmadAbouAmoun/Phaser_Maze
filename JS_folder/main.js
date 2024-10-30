@@ -172,7 +172,7 @@ function createLevel2() {
     platforms.create(292, 250, "wall");
     platforms.create(500, 250, "wall");
 
-    //3rd obstacle
+    //3rd
     platforms.create(750, 200, "obstacle");
     platforms.create(650, 200, "obstacle");
     platforms.create(350, 200, "obstacle");
@@ -197,6 +197,8 @@ function createLevel2() {
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
 
+    bombs = this.physics.add.group();
+
     // Collisions
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
@@ -208,7 +210,6 @@ function createLevel3() {
     platforms.clear(true, true);
 
     // Create Level 3 platforms and obstacles
-    //1st obstacle
     platforms.create(400, 568, "ground").setScale(2).refreshBody();
     platforms.create(800, 400, "obstacle");
     platforms.create(480, 400, "obstacle");
