@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <link rel="stylesheet" href="./styles.css" />
+        <script src="./JS_folder/script.js"></script>
     </head>
     <body>
         <nav class="navbar">
@@ -12,41 +13,42 @@
 
             <ul>
                 <li>
-                    <a href="./home.html">About Us</a>
+                    <a href="#about_us">About Us</a>
                 </li>
                 <li>
-                    <a href="Game.html">Features</a>
+                    <a href="#Features">Features</a>
                 </li>
             </ul>
             <img src="./assets/Character1.png" alt="" />
         </nav>
-        <div class="features">
+        <div class="features" id="Features">
             <div><img src="./assets/Character1.png" alt="" /></div>
             <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo, libero inventore doloribus
-                voluptatum pariatur consequuntur quam, neque dolor sed, ipsam ab magni nobis iste? Nam non iste ab
-                corrupti nulla!
-            </p>
+                Rori is Ruri's protective and energetic older brother. With his green hood and confident smile, he leads their adventures and keeps Ruri out of trouble—though he enjoys some fun along the way. Mischievous yet responsible, Rori values their strong bond.            </p>
         </div>
         <div class="features">
             <div><img src="./assets/Character2.png" alt="" /></div>
             <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo, libero inventore doloribus
-                voluptatum pariatur consequuntur quam, neque dolor sed, ipsam ab magni nobis iste? Nam non iste ab
-                corrupti nulla!
-            </p>
+                Ruri is a mischievous little brother to Rori. With a playful grin and purple hood, he loves adventures and harmless pranks. Small but bold, Ruri enjoys following his brother and often stumbles into funny situations.           </p>
+        </div>
+        <div class="user_input">
+            <label>enter your name</label>
+            <input type="text" id="username" placeholder="Name" />
         </div>
 
-
-
-
-
-
+        <div class="user_input">
+            <label>Which will you choose</label>
+            <select id="Character">
+                <option value="Green_Head">Rori</option>
+                <option value="Purple_Head">Ruri</option>
+            </select>
+            <button class="btn" onclick="ShareData()">Submit</button>
+        </div>
         <!--ABOUT US AND THE FOOTER DOWN HERE-->
 
         <div class="container" >
             <div class=" about">
-                <h2>About Us</h2>
+                <h2 id="about_us">About Us</h2>
     
             </div>
     

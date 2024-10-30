@@ -15,8 +15,10 @@ var config = {
         update: update,
     },
 };
+
 var game = new Phaser.Game(config);
-var character = "Purple_Head";
+var character = localStorage.getItem("character");
+var username = localStorage.getItem("username");
 var player;
 var stars;
 var platforms;
@@ -33,7 +35,7 @@ function preload() {
     this.load.image("obstacle", "assets/obstacle.png");
     this.load.image("wall", "assets/wall.jpg");
     this.load.image("star", "assets/star.png");
-    this.load.spritesheet("dude", "assets/Purple_Head.png", {frameWidth: 24, frameHeight: 36});
+    this.load.spritesheet("dude", `assets/${character}.png`, {frameWidth: 24, frameHeight: 36});
 }
 
 function update() {
@@ -145,6 +147,7 @@ function createLevel1() {
     // The score
     scoreText = this.add.text(16, 16, "Score: 0", {fontSize: "32px", fill: "#000"});
     level = this.add.text(16, 50, "Level :1", {fontSize: "32px", fill: "#000"});
+    Name = this.add.text(16, 85, `${username}`, {fontSize: "32px", fill: "#000"});
 
     // Collisions
     this.physics.add.collider(player, platforms);

@@ -64,14 +64,24 @@ img {
 .features > p {
     width: 20%;
 }
-@media screen and(max-width:900px) {
+@media screen and (max-width: 900px) {
     .features {
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        height: 100%;
+        gap: 10px;
     }
 }
 .user_input {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn {
+    height: 20px;
+}
+.btn:hover {
 }
 
 
