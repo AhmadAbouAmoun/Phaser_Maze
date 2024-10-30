@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <link rel="stylesheet" href="./styles.css" />
+        <script src="./JS_folder/script.js"></script>
     </head>
     <body>
         <nav class="navbar">
@@ -35,6 +36,18 @@
                 voluptatum pariatur consequuntur quam, neque dolor sed, ipsam ab magni nobis iste? Nam non iste ab
                 corrupti nulla!
             </p>
+        </div>
+        <div class="user_input">
+            <label>enter your name</label>
+            <input type="text" id="username" placeholder="Name" />
+        </div>
+        <div class="user_input">
+            <label>Which will you choose</label>
+            <select id="Character">
+                <option value="Green_Head">Rori</option>
+                <option value="Purple_Head">Ruri</option>
+            </select>
+            <button class="btn" onclick="ShareData()">Submit</button>
         </div>
     </body>
 </html>
