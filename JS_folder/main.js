@@ -142,8 +142,6 @@ function createLevel1() {
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
 
-    bombs = this.physics.add.group();
-
     // The score
     scoreText = this.add.text(16, 16, "Score: 0", {fontSize: "32px", fill: "#000"});
     level = this.add.text(16, 50, "Level :1", {fontSize: "32px", fill: "#000"});
@@ -264,7 +262,6 @@ function createLevel3() {
     this.physics.add.overlap(player, stars, collectStar, null, this);
 }
 
-
 function collectStar(player, star) {
     star.disableBody(true, true);
     score += 10;
@@ -273,62 +270,71 @@ function collectStar(player, star) {
     if (stars.countActive(true) === 0) {
         // Show win screen for the current level
         showWinScreen.call(this, currentLevel);
-        
+
         // Update the level counter
         if (currentLevel < 3) {
             currentLevel++;
-            level.setText("Level " + currentLevel); // Update the level display
+            level.setText("Level: " + currentLevel); // Update the level display
         }
     }
 }
 
 function showWinScreen(level) {
     // Create a black overlay
-    const overlay = this.add.graphics();
-    overlay.fillStyle(0x000000, 0.8);  // Black with 80% opacity
+    var overlay = this.add.graphics();
+    overlay.fillStyle(0x000000, 0.8); // Black with 80% opacity
     overlay.fillRect(0, 0, this.sys.game.config.width, this.sys.game.config.height);
 
     // Determine the message based on the level
-    const message = level === 3 ? "Congrats! You've completed all levels!" : `You won Level ${level}!`;
+    var message = level === 3 ? "Congrats! You've completed all levels!" : `You won Level ${level}!`;
 
     // Display the message text with wrapping
     const winText = this.add.text(this.sys.game.config.width / 2, this.sys.game.config.height / 2, message, {
         fontSize: "32px",
         color: "#ffffff",
         align: "center",
-        wordWrap: { width: this.sys.game.config.width - 40 }
+        wordWrap: {width: this.sys.game.config.width - 40},
     });
     winText.setOrigin(0.5);
 
     if (level === 3) {
         // Automatically reset the game to Level 1 after a short delay
-        this.time.delayedCall(3000, () => {
-            // Reset the game state for Level 1
-            currentLevel = 1;
-            score = 0;
-            gameOver = false;
+        this.time.delayedCall(
+            3000,
+            () => {
+                // Reset the game state for Level 1
+                currentLevel = 1;
+                score = 0;
+                gameOver = false;
 
-            // Update displayed score and level text
-            scoreText.setText("Score: " + score);
-            level.setText("Level: " + currentLevel);
+                // Update displayed score
+                scoreText.setText("Score: " + score);
 
-            // Remove overlay and message, then restart Level 1
-            overlay.destroy();
-            winText.destroy();
-            createLevel1.call(this);
-        }, [], this);
+                // Remove overlay and message, then restart Level 1
+                overlay.destroy();
+                winText.destroy();
+                createLevel1.call(this);
+            },
+            [],
+            this
+        );
     } else {
         // Auto-load the next level after a short delay
-        this.time.delayedCall(2000, () => {
-            overlay.destroy();
-            winText.destroy();
+        this.time.delayedCall(
+            2000,
+            () => {
+                overlay.destroy();
+                winText.destroy();
 
-            // Load the next level based on the current level
-            if (level === 1) {
-                createLevel2.call(this);
-            } else if (level === 2) {
-                createLevel3.call(this);
-            }
-        }, [], this);
+                // Load the next level based on the current level
+                if (level === 1) {
+                    createLevel2.call(this);
+                } else if (level === 2) {
+                    createLevel3.call(this);
+                }
+            },
+            [],
+            this
+        );
     }
 }
