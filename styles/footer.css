@@ -1,0 +1,104 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #cbd2a4;
+}
+
+footer h2 {
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 20px;
+    flex-wrap: wrap;
+}
+
+.quick,
+.contact,
+.privacy {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
+}
+
+.quick h3,
+.contact h3,
+.privacy h3 {
+    font-size: 1.5rem;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin: 0;
+}
+
+.quick ul,
+.contact ul,
+.privacy ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick li,
+.contact li,
+.privacy li {
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.quick,
+.contact,
+.privacy {
+    text-decoration: none;
+    color: #000000;
+}
+
+.email-link {
+    text-decoration: none;
+    color: #000000;
+}
+
+.email-link:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    footer h2 {
+        font-size: 1.5rem;
+    }
+
+    .quick h3,
+    .contact h3,
+    .privacy h3 {
+        font-size: 1.2rem;
+    }
+
+    .quick li,
+    .contact li,
+    .privacy li {
+        font-size: 1rem;
+    }
+}
+/* Responsive styles */
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .quick,
+    .contact,
+    .privacy {
+        min-width: 100%;
+    }
+}
